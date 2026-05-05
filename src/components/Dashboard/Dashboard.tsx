@@ -1,9 +1,8 @@
-
 import { useState } from "react";
 import TaskFilter from "../TaskFilter/TaskFilter";
 import TaskList from "../TaskList/TaskList";
 import type { Task } from "../../types/index";
-import AddTaskForm from "../TaskForm/TaskForm";
+import TaskForm from "../TaskForm/TaskForm";
 
 /**
  * Dashboard component serves as the main component of the Task Manager application. 
@@ -18,33 +17,7 @@ function Dashboard() {
      * Initial task list with 3 tasks. In a real application, 
      * this data would likely come from an API or database.
      */
-    const [taskList] = useState<Task[]>([
-        {
-            id: '1',
-            title: 'Task 1',
-            description: 'Description for Task 1',
-            status: 'pending',
-            priority: 'medium',
-            dueDate: '2025-12-31'
-        },
-        {
-            id: '2',
-            title: 'Task 2',
-            description: 'Description for Task 2',
-            status: 'in-progress',
-            priority: 'high',
-            dueDate: '2025-11-30'
-        },
-        {
-            id: '3',
-            title: 'Task 3',
-            description: 'Description for Task 3',
-            status: 'completed',
-            priority: 'low',
-            dueDate: '2025-10-31'
-        }
-    ]
-    )
+    const [taskList, setTaskList] = useState<Task[]>([])
 
     /**
      * State to hold the filtered list of tasks based on the selected filters. 
@@ -52,13 +25,19 @@ function Dashboard() {
      */
     const [filteredTaskList, setFilteredTaskList] = useState<Task[]>(taskList)
 
+    const handleTaskAdd = (newTask: Task) => {  
+        console.log('This New Task:', newTask)
+        setTaskList([...taskList, newTask])
+        setFilteredTaskList([...taskList, newTask])
+    }
+
     return (
         <div>
             <br />
             <h2>Welcome to the Task Manager App! </h2>
             <br />
 
-            <AddTaskForm /> <br /><br />
+           <TaskForm onTaskAdded = {handleTaskAdd}  />    
 
 
             {/**
