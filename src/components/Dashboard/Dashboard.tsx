@@ -15,17 +15,16 @@ import { useTheme } from "../ThemeContext/ThemeContext";
  */
 function Dashboard() {
 
-
-      const { colors } = useTheme() 
-      
-      const appStyles = {
+    // Get the current theme colors from the ThemeContext using the useTheme hook.
+    const { colors } = useTheme()
+    // Define styles for the dashboard component using the theme colors.
+    const appStyles = {
         backgroundColor: colors.background,
         color: colors.text,
         minHeight: '100vh',
         transition: 'all 0.3s ease', // Smooth transition!
         padding: '20px',
-      }
-
+    }
 
     /**
      * State to hold the list of tasks. It is initialized with 
@@ -53,7 +52,7 @@ function Dashboard() {
     useEffect(() => {
         console.log('Saving tasks to localStorage:', taskList)
         localStorage.setItem("tasks", JSON.stringify(taskList))
-    }, [taskList])  
+    }, [taskList])
 
 
     /**
@@ -62,6 +61,7 @@ function Dashboard() {
      */
     const [filteredTaskList, setFilteredTaskList] = useState<Task[]>(taskList)
 
+    // Callback function to handle adding a new task to the task list.
     const handleTaskAdd = (newTask: Task) => {
         console.log('This New Task:', newTask)
         setTaskList([...taskList, newTask])
@@ -71,18 +71,18 @@ function Dashboard() {
     return (
 
         <div style={appStyles}>
-
-             <ThemeToggle />
+            {/* Render the ThemeToggle component to allow users to switch between light and dark themes. */}
+            <ThemeToggle />
             <br />
-            <h2 style={{border: '1px solid #8b7070', color: "#8b7070"}}>Welcome to the Task Manager App! </h2>
+            <h2 style={{ border: '1px solid #8b7070', color: "#8b7070" }}>Welcome to the Task Manager App! </h2>
             <br />
 
             <TaskForm onTaskAdded={handleTaskAdd} />
 
             {/**
-      * TaskFilter component allows users to filter tasks based on their status and priority.
-      * The onFilterChange prop is a callback function that updates the filtered task list based on the selected filters.
-      */}
+             * TaskFilter component allows users to filter tasks based on their status and priority.
+             * The onFilterChange prop is a callback function that updates the filtered task list based on the selected filters.
+             */}
             <TaskFilter onFilterChange={(filters) => {
 
                 console.log('Filters changed:', filters)
@@ -107,8 +107,8 @@ function Dashboard() {
             <br />
 
             {/**
-      * TaskList component displays the list of tasks based on the applied filters.
-      */}
+              * TaskList component displays the list of tasks based on the applied filters.
+              */}
             <TaskList tasks={filteredTaskList}
                 /**
                  * onStatusChange is a callback function that updates 

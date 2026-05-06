@@ -1,15 +1,12 @@
 import { useTheme } from "./ThemeContext";
 
-
+/**
+ * ThemeToggle component provides a user interface for toggling between light and dark themes. 
+ * It uses the useTheme hook to access the current theme state and the toggleTheme function from the ThemeContext. 
+ * The component renders a checkbox that allows users to switch between light and dark modes, and it displays the current mode as text next to the checkbox.
+ */
 const ThemeToggle = () => {
-    // const { theme, toggleTheme } = useContext(ThemeContext);
     const { isDarkMode, toggleTheme } = useTheme()
-
-    // return (
-    //     <button onClick={toggleTheme} className="theme-toggle">
-    //         Switch to {theme === 'light' ? 'Dark' : 'Light'} Mode
-    //     </button>
-    // );
 
     return (
         <div style={{ display: 'flex', justifyContent: 'flex-end', padding: '10px' }}>

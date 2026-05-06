@@ -1,6 +1,4 @@
 
-
-
 function TaskForm({ onTaskAdded }: { onTaskAdded: (task: any) => void }) {
 
     const handleSubmit = (e: React.SubmitEvent) => {
@@ -20,18 +18,18 @@ function TaskForm({ onTaskAdded }: { onTaskAdded: (task: any) => void }) {
         if (!newTask.title || !newTask.description || !newTask.dueDate) {
             alert("Please fill in all required fields (Title, Description, Due Date).");
             return;
-        }   
+        }
 
-        onTaskAdded(newTask)    
+        onTaskAdded(newTask)
         alert("Task added successfully!")
-         // Clear form data after submission
+        // Clear form data after submission
         e.target.reset();
-    }   
+    }
 
     return (
         <div>
             <h3>Add New Task</h3>
-            <form style={{ border: '1px solid #8b7070'}} onSubmit={handleSubmit}>
+            <form style={{ border: '1px solid #8b7070' }} onSubmit={handleSubmit}>
                 <div ><br />
                     <label htmlFor="title" style={{ marginRight: "20px" }}>Title:</label>
                     <input type="text" id="title" name="title" />

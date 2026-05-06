@@ -1,34 +1,29 @@
 import { createContext, use, useContext, useState, type ReactNode } from "react"
 
-
-// const ThemeContext = createContext({
-//     theme: "light",
-//     toggleTheme: () => { },
-// })
-
-////const ThemeContext = createContext()
-
+// Define the shape of the theme context, including the current theme state and a function to toggle the theme.
 const ThemeContext = createContext(
-    { isDarkMode: false,
-      toggleTheme: () => {},
-      colors: {
-        background: "#fff",
-        text: "#333",
-        primary: "#007bff",
-        secondary: "#6c757d",
-      },
+    {
+        isDarkMode: false,
+        toggleTheme: () => { },
+        colors: {
+            background: "#fff",
+            text: "#333",
+            primary: "#007bff",
+            secondary: "#6c757d",
+        },
     }
 )
 
-
-// export const ThemeProvider = ({ children }: { children: ReactNode }) => {
+/**
+ * ThemeProvider component is responsible for managing the theme state and providing it to the rest of the application. 
+ * It uses the useState hook to manage the isDarkMode state, which determines whether the dark mode is enabled or not. 
+ * The toggleTheme function toggles the value of isDarkMode between true and false. 
+ * The theme object contains the current theme state and the colors for both light and dark modes. 
+ * The ThemeProvider component wraps its children with the ThemeContext.Provider, passing down the theme object as the value.
+ */
 export const ThemeProvider = ({ children }: { children: ReactNode }) => {
-    //const [theme, setTheme] = useState("light")
-    const [isDarkMode, setIsDarkMode] = useState(false) 
 
-    // const toggleTheme = () => {
-    //     setTheme((prevTheme) => (prevTheme === "light" ? "dark" : "light"))
-    // }
+    const [isDarkMode, setIsDarkMode] = useState(false)
 
     const toggleTheme = () => setIsDarkMode(prevMode => !prevMode)
 
@@ -43,29 +38,12 @@ export const ThemeProvider = ({ children }: { children: ReactNode }) => {
         }
     }
 
-
-    // return (
-    //     <ThemeContext.Provider value={{ theme, toggleTheme }}>
-    //         {children}
-    //     </ThemeContext.Provider>
-    // )
-
-    return ( 
+    return (
         <ThemeContext.Provider value={theme}>
             {children}
-        </ThemeContext.Provider>        
+        </ThemeContext.Provider>
     )
-    
+
 }
 
-// export const useTheme = () => {    
-//     const context = ThemeContext
-//     if (!context) {
-//         throw new Error("useTheme must be used within a ThemeProvider")
-//     }
-//     return context
-// }   
-
 export const useTheme = () => useContext(ThemeContext)
-
-

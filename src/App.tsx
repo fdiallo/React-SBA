@@ -10,11 +10,10 @@ import ThemeToggle from "./components/ThemeContext/ThemeToggle";
  */
 function App() {
 
-
   return (
+    /* Wrap the entire application with the ThemeProvider to provide theme context to all components. */
     <ThemeProvider>
       <div>
-       
         <Dashboard />
       </div>
     </ThemeProvider>

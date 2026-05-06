@@ -23,13 +23,13 @@ function TaskItem({ task: { id, title, description, status, priority, dueDate },
                     {/**
                         * The button allows users to delete the task when clicked.
                      */}
-                    <button style={{marginLeft: '20px'}} onClick={() => onDelete(id)}>Delete</button>
+                    <button style={{ marginLeft: '20px' }} onClick={() => onDelete(id)}>Delete</button>
                 </div>
             </div>
-            <div style={{display: 'flex', marginBottom: '10px'}}>
+            <div style={{ display: 'flex', marginBottom: '10px' }}>
                 <p>{description}</p>
             </div>
-             <div style={{display: 'flex', marginBottom: '10px' }}>
+            <div style={{ display: 'flex', marginBottom: '10px' }}>
                 <p>
                     <span style={{ paddingRight: '20px' }}>Priority: {priority}</span>
                     <span>Due Date: {dueDate}</span>
