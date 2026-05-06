@@ -3,6 +3,8 @@ import TaskFilter from "../TaskFilter/TaskFilter";
 import TaskList from "../TaskList/TaskList";
 import type { Task } from "../../types/index";
 import TaskForm from "../TaskForm/TaskForm";
+import ThemeToggle from "../ThemeContext/ThemeToggle";
+import { useTheme } from "../ThemeContext/ThemeContext";
 
 /**
  * Dashboard component serves as the main component of the Task Manager application. 
@@ -12,6 +14,18 @@ import TaskForm from "../TaskForm/TaskForm";
  * updating task status, and deleting tasks.  
  */
 function Dashboard() {
+
+
+      const { colors } = useTheme() 
+      
+      const appStyles = {
+        backgroundColor: colors.background,
+        color: colors.text,
+        minHeight: '100vh',
+        transition: 'all 0.3s ease', // Smooth transition!
+        padding: '20px',
+      }
+
 
     /**
      * State to hold the list of tasks. It is initialized with 
@@ -55,9 +69,12 @@ function Dashboard() {
     }
 
     return (
-        <div>
+
+        <div style={appStyles}>
+
+             <ThemeToggle />
             <br />
-            <h2>Welcome to the Task Manager App! </h2>
+            <h2 style={{border: '1px solid #8b7070', color: "#8b7070"}}>Welcome to the Task Manager App! </h2>
             <br />
 
             <TaskForm onTaskAdded={handleTaskAdd} />

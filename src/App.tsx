@@ -1,4 +1,6 @@
 import Dashboard from "./components/Dashboard/Dashboard";
+import { ThemeProvider, useTheme } from "./components/ThemeContext/ThemeContext";
+import ThemeToggle from "./components/ThemeContext/ThemeToggle";
 
 /**
  * Task Manager App
@@ -8,10 +10,14 @@ import Dashboard from "./components/Dashboard/Dashboard";
  */
 function App() {
 
+
   return (
-    <div>
-      <Dashboard />
-    </div>
+    <ThemeProvider>
+      <div>
+       
+        <Dashboard />
+      </div>
+    </ThemeProvider>
   )
 }
 

@@ -31,7 +31,7 @@ function TaskForm({ onTaskAdded }: { onTaskAdded: (task: any) => void }) {
     return (
         <div>
             <h3>Add New Task</h3>
-            <form style={{ border: "1px solid white" }} onSubmit={handleSubmit}>
+            <form style={{ border: '1px solid #8b7070'}} onSubmit={handleSubmit}>
                 <div ><br />
                     <label htmlFor="title" style={{ marginRight: "20px" }}>Title:</label>
                     <input type="text" id="title" name="title" />
