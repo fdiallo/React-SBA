@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import TaskFilter from "../TaskFilter/TaskFilter";
 import TaskList from "../TaskList/TaskList";
 import type { Task } from "../../types/index";
@@ -14,10 +14,33 @@ import TaskForm from "../TaskForm/TaskForm";
 function Dashboard() {
 
     /**
-     * Initial task list with 3 tasks. In a real application, 
-     * this data would likely come from an API or database.
+     * State to hold the list of tasks. It is initialized with 
+     * an empty array or with saved tasks from localStorage if available.       
+     * The useState hook is used to manage the state of the task list, 
+     * and it is initialized with a function that retrieves saved tasks from localStorage.
+     * This allows the application to persist tasks across page reloads by saving 
+     * them in the browser's local storage. If there are saved tasks, 
+     * they are parsed from JSON and set as the initial state; otherwise, an empty array is used.
      */
-    const [taskList, setTaskList] = useState<Task[]>([])
+    const [taskList, setTaskList] = useState<Task[]>(() => {
+        const savedTasks = localStorage.getItem("tasks")
+        console.log('Loaded tasks from localStorage:', savedTasks)
+        return savedTasks ? JSON.parse(savedTasks) : []
+    }
+    )
+
+    /**
+     * useEffect hook is used to save the task list to localStorage whenever the task list changes. 
+      * This ensures that any changes to the task list are persisted in localStorage, 
+      * allowing the tasks to be retained even after a page reload. The effect runs 
+      * whenever the taskList state changes, and it updates the localStorage 
+      * with the new task list by converting it to a JSON string.  
+     */
+    useEffect(() => {
+        console.log('Saving tasks to localStorage:', taskList)
+        localStorage.setItem("tasks", JSON.stringify(taskList))
+    }, [taskList])  
+
 
     /**
      * State to hold the filtered list of tasks based on the selected filters. 
@@ -25,7 +48,7 @@ function Dashboard() {
      */
     const [filteredTaskList, setFilteredTaskList] = useState<Task[]>(taskList)
 
-    const handleTaskAdd = (newTask: Task) => {  
+    const handleTaskAdd = (newTask: Task) => {
         console.log('This New Task:', newTask)
         setTaskList([...taskList, newTask])
         setFilteredTaskList([...taskList, newTask])
@@ -37,7 +60,7 @@ function Dashboard() {
             <h2>Welcome to the Task Manager App! </h2>
             <br />
 
-           <TaskForm onTaskAdded = {handleTaskAdd}  />    
+            <TaskForm onTaskAdded={handleTaskAdd} />
 
             {/**
       * TaskFilter component allows users to filter tasks based on their status and priority.
@@ -95,10 +118,10 @@ function Dashboard() {
                  * onDelete is a callback function that deletes a task when 
                  * the delete button is clicked in the TaskItem component.    
                  */
-                 onDelete={(taskId) => {
+                onDelete={(taskId) => {
                     console.log(`Task ${taskId} deleted`)
-                     setFilteredTaskList(filteredTaskList.filter(task => task.id !== taskId))
-                     setTaskList(taskList.filter(task => task.id !== taskId))
+                    setFilteredTaskList(filteredTaskList.filter(task => task.id !== taskId))
+                    setTaskList(taskList.filter(task => task.id !== taskId))
                 }
                 }
             />

@@ -21,8 +21,9 @@ function TaskForm({ onTaskAdded }: { onTaskAdded: (task: any) => void }) {
             alert("Please fill in all required fields (Title, Description, Due Date).");
             return;
         }   
-        
+
         onTaskAdded(newTask)    
+        alert("Task added successfully!")
          // Clear form data after submission
         e.target.reset();
     }   
