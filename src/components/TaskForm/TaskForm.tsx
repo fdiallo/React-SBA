@@ -16,6 +16,12 @@ function TaskForm({ onTaskAdded }: { onTaskAdded: (task: any) => void }) {
             priority: formData.get("priority") as string,
             dueDate: formData.get("dueDate") as string,
         }
+
+        if (!newTask.title || !newTask.description || !newTask.dueDate) {
+            alert("Please fill in all required fields (Title, Description, Due Date).");
+            return;
+        }   
+        
         onTaskAdded(newTask)    
          // Clear form data after submission
         e.target.reset();

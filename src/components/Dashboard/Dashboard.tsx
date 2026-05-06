@@ -37,6 +37,8 @@ function Dashboard() {
             <h2>Welcome to the Task Manager App! </h2>
             <br />
 
+
+
            <TaskForm onTaskAdded = {handleTaskAdd}  />    
 
 
@@ -90,11 +92,14 @@ function Dashboard() {
                  * onDelete is a callback function that deletes a task when 
                  * the delete button is clicked in the TaskItem component.    
                  */
-                onDelete={(taskId) => {
+                 onDelete={(taskId) => {
                     console.log(`Task ${taskId} deleted`)
                     setFilteredTaskList(filteredTaskList.filter(task => task.id !== taskId))
                 }
                 }
+
+                 
+
             />
 
         </div>
