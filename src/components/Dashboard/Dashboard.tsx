@@ -85,6 +85,12 @@ function Dashboard() {
                         }
                         return task
                     }))
+                    setTaskList(taskList.map(task => {
+                        if (task.id === taskId) {
+                            return { ...task, status: newStatus }
+                        }
+                        return task
+                    }))
                 }
                 }
 
@@ -94,7 +100,8 @@ function Dashboard() {
                  */
                  onDelete={(taskId) => {
                     console.log(`Task ${taskId} deleted`)
-                    setFilteredTaskList(filteredTaskList.filter(task => task.id !== taskId))
+                     setFilteredTaskList(filteredTaskList.filter(task => task.id !== taskId))
+                     setTaskList(taskList.filter(task => task.id !== taskId))
                 }
                 }
 
